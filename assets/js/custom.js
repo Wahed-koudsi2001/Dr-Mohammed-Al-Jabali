@@ -25,7 +25,7 @@ $(document).ready(function () {
         // testimonial slider
         am_testimonial_slider: function () {
             var swiper = new Swiper(".hc-news", {
-                slidesPerView: 2,
+                slidesPerView: 3,
                 spaceBetween: 30,
                 loop: true,
                 speed: 1000,
@@ -33,7 +33,6 @@ $(document).ready(function () {
                     el: ".hc-news .swiper-pagination",
                     clickable: true,
                 },
-
                 breakpoints: {
                     1199: {
                         slidesPerView: 3,
@@ -114,6 +113,7 @@ $(document).ready(function () {
                 },
             });
         },
+
         // feedbackslider
         // toggle menu
         toggle_menu: function () {
@@ -208,5 +208,56 @@ $(document).ready(function () {
         });
     });
 
+
+    $(document).ready(function () {
+        // Show the result box on form submit
+        $('#bmiForm').on('submit', function (e) {
+            e.preventDefault(); // Prevent form submission
+
+            const heightInput = $('#height').val();
+            const weightInput = $('#weight').val();
+
+            if (!heightInput || !weightInput || heightInput <= 0 || weightInput <= 0) {
+                alert("الرجاء إدخال قيم صحيحة للطول والوزن.");
+                return;
+            }
+
+            const heightInMeters = heightInput / 100;
+
+            const bmi = (weightInput / (heightInMeters * heightInMeters)).toFixed(2);
+
+            let category = '';
+            if (bmi < 18.5) {
+                category = 'نقص الوزن';
+            } else if (bmi >= 18.5 && bmi < 24.9) {
+                category = 'وزن طبيعي';
+            } else if (bmi >= 25 && bmi < 29.9) {
+                category = 'زيادة الوزن';
+            } else {
+                category = 'السمنة';
+            }
+
+            $('.status').text(`مؤشر كتلة الجسم: ${bmi} - ${category}`);
+            $('.status').css('background-color', bmi < 18.5 ? 'lightblue' :
+                bmi < 24.9 ? 'lightgreen' :
+                    bmi < 29.9 ? 'yellow' : 'red');
+            $('.layout').fadeIn();
+        });
+
+        // Close the result box on "X" click
+        $('.fa-xmark').on('click', function () {
+            $('.layout').fadeOut();
+        });
+
+        // Close the result box if clicked outside the .result box
+        $(document).on('click', function (e) {
+            const layout = $('.layout');
+            const resultBox = $('.result');
+
+            if (layout.is(':visible') && !resultBox.is(e.target) && resultBox.has(e.target).length === 0) {
+                layout.fadeOut();
+            }
+        });
+    });
     HealthCare.init();
 })(jQuery);
