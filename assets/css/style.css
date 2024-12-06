@@ -655,7 +655,7 @@ p {
     display: grid;
     grid-template-columns: 18px 1fr;
     gap: 12px;
-    margin-top: 24px;
+    margin-top: 14px;
     align-items: center;
 }
 .hc-about-btn {
