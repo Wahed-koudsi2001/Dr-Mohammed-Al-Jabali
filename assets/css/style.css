@@ -1864,7 +1864,6 @@ span.searchBtn {
     }
     .hc-about-img {
         order: 2;
-        margin-top: 40px;
     }
     .hc-team-row {
         margin-right: -12px;
@@ -2245,7 +2244,12 @@ span.searchBtn {
     -ms-transform: translate(-50%, -50%);
     -o-transform: translate(-50%, -50%);
     z-index: 999999999999;
+    border-radius: 10px;
     overflow-y: scroll;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
 }
 .read p {
     line-height: 2;
@@ -2479,6 +2483,9 @@ button[type="submit"] {
     background-color: #0065c3;
     border: 1px solid #fff;
     padding: 12px 0;
+}
+.wahed-padding{
+    padding-bottom: 0;
 }
 @media (max-width: 768px) {
     button[type="submit"] {
